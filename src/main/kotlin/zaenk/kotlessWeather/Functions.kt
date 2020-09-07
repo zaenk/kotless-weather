@@ -7,7 +7,8 @@ import zaenk.kotlessWeather.services.ForecastService
 import zaenk.kotlessWeather.services.JSON
 
 @Get("/api/forecast")
-fun forecast(lat: Float, long: Float): HttpResponse {
+fun forecast(lat: Float, long: Float, unit: TemperatureUnit = TemperatureUnit.CELSIUS): HttpResponse {
     val forecast = ForecastService.getForecast(lat, long)
-    return json(JSON.encodeToString(forecast))
+    val converted = forecast.convertTo(unit)
+    return json(JSON.encodeToString(converted))
 }

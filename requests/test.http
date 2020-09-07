@@ -7,3 +7,15 @@ client.test("Request executed successfully", function() {
   client.assert(response.body.temperatureUnit === 'CELSIUS', "Response temperature unit is not celsius")
 });
 %}
+
+###
+
+GET {{ server }}/api/forecast?long=39.7456&lat=-97.0892&unit=F
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Response status is not json");
+  client.assert(response.body.temperatureUnit === 'FAHRENHEIT', "Response temperature unit is not fahrenheit")
+});
+%}
