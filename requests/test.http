@@ -1,7 +1,9 @@
-GET {{ server }}/
+GET {{ server }}/api/forecast?lat=39.7456&long=-97.0892
 
 > {%
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Response status is not json");
+  client.assert(response.body.temperatureUnit === 'CELSIUS', "Response temperature unit is not celsius")
 });
 %}

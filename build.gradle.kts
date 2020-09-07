@@ -6,6 +6,7 @@ withLocalProperties()
 plugins {
     kotlin("jvm") version "1.3.72" apply true
     id("io.kotless") version "0.1.6" apply true
+    kotlin("plugin.serialization") version "1.3.72"
 }
 
 group = "zaenk.kotlessWeather"
@@ -18,6 +19,16 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation("io.kotless", "kotless-lang", "0.1.6")
+}
+
+tasks {
+    withType<org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile> {
+        kotlinOptions {
+            freeCompilerArgs = listOf(
+                "-Xopt-in=kotlin.RequiresOptIn"
+            )
+        }
+    }
 }
 
 val env: String by extra
