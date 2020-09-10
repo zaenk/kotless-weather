@@ -20,6 +20,7 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("io.kotless", "kotless-lang", "0.1.6")
     implementation("org.jetbrains.kotlinx", "kotlinx-html-jvm", "0.6.11")
+    implementation("com.amazonaws", "aws-java-sdk-dynamodb", "1.11.858")
 }
 
 tasks {
@@ -45,6 +46,16 @@ kotless {
         terraform {
             profile = awsProfile
             region = awsRegion
+        }
+    }
+    extensions {
+        local {
+            useAWSEmulation = true
+        }
+        terraform {
+            files {
+                add(file("src/terraform/dynamodb.tf"))
+            }
         }
     }
 }

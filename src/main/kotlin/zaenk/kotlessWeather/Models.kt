@@ -42,4 +42,6 @@ data class Station(
     val gridId: String,
     val gridX: Int,
     val gridY: Int
-)
+) {
+    companion object
+}
