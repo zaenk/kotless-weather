@@ -1,4 +1,7 @@
 import io.kotless.plugin.gradle.dsl.kotless
+import zaenk.buildutils.withLocalProperties
+
+withLocalProperties()
 
 plugins {
     kotlin("jvm") version "1.3.72" apply true
@@ -17,13 +20,19 @@ dependencies {
     implementation("io.kotless", "kotless-lang", "0.1.6")
 }
 
+val env: String by extra
+val awsProfile: String by extra
+val awsRegion: String by extra
+val kotlessBucket: String by extra
+
 kotless {
     config {
-        bucket = "kotless.s3.example.com"
+        bucket = kotlessBucket
+        prefix = env
 
         terraform {
-            profile = "example"
-            region = "us-east-1"
+            profile = awsProfile
+            region = awsRegion
         }
     }
 }
