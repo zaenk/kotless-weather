@@ -20,3 +20,13 @@ With LocalStack, check the dynamo db content:
 # docker ps - find out the mapped port for 4569
 aws --endpoint-url http://localhost:4569/ dynamodb scan --table-name weather-stations
 ```
+
+## Place for improvements
+
+* Windows *support*
+* Tagging resources
+* More control over naming of applications
+* Naming resources with permissions, at least with prefix
+* Update AWS Java SDK v2
+* Update Kotlin 1.4
+* Update Kotlinx serialization 1.0
