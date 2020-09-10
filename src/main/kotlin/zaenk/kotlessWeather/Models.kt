@@ -37,3 +37,9 @@ enum class TemperatureUnit {
         }
     }
 }
+
+data class Station(
+    val gridId: String,
+    val gridX: Int,
+    val gridY: Int
+)
