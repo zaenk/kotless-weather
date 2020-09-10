@@ -1,4 +1,5 @@
 GET {{ server }}/api/forecast?lat=39.7456&long=-97.0892
+Authorization: Basic YWRtaW46YWRtaW4=
 
 > {%
 client.test("Request executed successfully", function() {
@@ -10,12 +11,24 @@ client.test("Request executed successfully", function() {
 
 ###
 
-GET {{ server }}/api/forecast?long=39.7456&lat=-97.0892&unit=F
+GET {{ server }}/api/forecast?lat=39.7456&long=-97.0892&unit=F
+Authorization: Basic YWRtaW46YWRtaW4=
 
 > {%
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Response status is not json");
   client.assert(response.body.temperatureUnit === 'FAHRENHEIT', "Response temperature unit is not fahrenheit")
+});
+%}
+
+###
+
+GET {{ server }}/api/forecast?lat=39.7456&long=-97.0892&unit=F
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 401, "Response status is not 401");
+  client.assert(response.headers.valueOf("WWW-Authenticate") === "Basic realm=\"you shall not pass\"", "Response headers are not ok");
 });
 %}
