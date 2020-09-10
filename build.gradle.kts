@@ -19,6 +19,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation("io.kotless", "kotless-lang", "0.1.6")
+    implementation("org.jetbrains.kotlinx", "kotlinx-html-jvm", "0.6.11")
 }
 
 tasks {
